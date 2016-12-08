@@ -1,0 +1,23 @@
+{
+    "name": "refear99/easy-mns",
+    "description": "This package provides a easy way to access Aliyun MNS.",
+    "keywords": ["aliyun", "mns"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan",
+            "email": "refear99@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.2",
+        "guzzlehttp/psr7": "~1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "AliyunMNS\\": "library/AliyunMNS/",
+            "Refear99\\EasyMns\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
