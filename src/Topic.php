@@ -6,7 +6,6 @@ use AliyunMNS\Client;
 use AliyunMNS\Model\MessageAttributes;
 use AliyunMNS\Model\SubscriptionAttributes;
 use AliyunMNS\Requests\PublishMessageRequest;
-use AliyunMNS\Requests\CreateTopicRequest;
 use AliyunMNS\Exception\MnsException;
 use AliyunMNS\Responses\PublishMessageResponse;
 
@@ -27,7 +26,7 @@ class Topic extends Mns
      * @return array
      * @throws \Exception
      */
-    public function sendMessage($topicName, $message, $messageTag = null, $messageAttributes = null)
+    public function sendMessageToTopic($topicName, $message, $messageTag = null, $messageAttributes = null)
     {
         try {
             if (is_array($message)) {
@@ -51,8 +50,9 @@ class Topic extends Mns
             }
 
             return [
-                'message_id'       => $result->messageId,
-                'message_body_md5' => $result->messageBodyMD5,
+                'message_status_code' => $result->getStatusCode(),
+                'message_id'       => $result->getMessageId(),
+                'message_body_md5' => $result->getMessageBodyMD5(),
             ];
 
         } catch (\Exception $e) {

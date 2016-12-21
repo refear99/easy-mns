@@ -44,6 +44,7 @@ class Constants
     const LOGGING_BUCKET = "LoggingBucket";
     const LOGGING_ENABLED = "LoggingEnabled";
     const MESSAGE_ATTRIBUTES = "MessageAttributes";
+    const MESSAGE_TAGS = "MessageTag";
     const SUBJECT = "Subject";
     const ACCOUNT_NAME = "AccountName";
     const ADDRESS_TYPE = "AddressType";
