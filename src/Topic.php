@@ -2,12 +2,8 @@
 
 namespace Refear99\EasyMns;
 
-use AliyunMNS\Client;
 use AliyunMNS\Model\MessageAttributes;
-use AliyunMNS\Model\SubscriptionAttributes;
 use AliyunMNS\Requests\PublishMessageRequest;
-use AliyunMNS\Exception\MnsException;
-use AliyunMNS\Responses\PublishMessageResponse;
 
 class Topic extends Mns
 {
@@ -51,8 +47,8 @@ class Topic extends Mns
 
             return [
                 'message_status_code' => $result->getStatusCode(),
-                'message_id'       => $result->getMessageId(),
-                'message_body_md5' => $result->getMessageBodyMD5(),
+                'message_id'          => $result->getMessageId(),
+                'message_body_md5'    => $result->getMessageBodyMD5(),
             ];
 
         } catch (\Exception $e) {
