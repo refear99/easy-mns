@@ -50,8 +50,6 @@ class Topic extends Mns
                 throw new \Exception('Send Message Failed. Status Code ' . $result->getStatusCode());
             }
 
-            dd(gettype($result), $result);
-
             return [
                 'message_id'       => $result->messageId,
                 'message_body_md5' => $result->messageBodyMD5,
