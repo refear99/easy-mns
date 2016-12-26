@@ -14,4 +14,9 @@ class Mns
 
         $this->mns = new MnsClient($config['endpoint'], $config['key'], $config['secret']);
     }
+
+    public function getClient()
+    {
+        return $this->mns;
+    }
 }
