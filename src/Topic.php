@@ -22,7 +22,7 @@ class Topic extends Mns
      * @return array
      * @throws \Exception
      */
-    public function sendMessageToTopic($topicName, $message, $messageTag = null, $messageAttributes = null)
+    public function publishMessage($topicName, $message, $messageTag = null, $messageAttributes = null)
     {
         try {
             if (is_array($message)) {
