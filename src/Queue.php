@@ -29,7 +29,7 @@ class Queue extends Mns
                 throw new \Exception('Invalid Message');
             }
 
-            $request = new SendMessageRequest($message, $delay, $priority, $base64);
+            $request = new SendMessageRequest(base64_encode($message), $delay, $priority, $base64);
 
             $result = $this->mns->getQueueRef($queueName)->sendMessage($request);
 

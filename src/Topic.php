@@ -37,7 +37,7 @@ class Topic extends Mns
                 $messageAttributes = new MessageAttributes($messageAttributes);
             }
 
-            $request = new PublishMessageRequest($message, $messageTag, $messageAttributes);
+            $request = new PublishMessageRequest(base64_encode($message), $messageTag, $messageAttributes);
 
             $result = $this->mns->getTopicRef($topicName)->publishMessage($request);
 
