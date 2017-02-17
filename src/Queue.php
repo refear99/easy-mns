@@ -18,7 +18,7 @@ class Queue extends Mns
      * @return array
      * @throws \Exception
      */
-    public function sendMessage($queueName, $message, $delay = null, $priority = null, $base64 = true)
+    public function sendMessage($queueName, $message, $delay = null, $priority = null, $base64 = false)
     {
         try {
             if (is_array($message)) {
@@ -29,9 +29,9 @@ class Queue extends Mns
                 throw new \Exception('Invalid Message');
             }
 
-            $request = new SendMessageRequest(base64_encode($message), $delay, $priority, $base64);
+            $request = new SendMessageRequest($message, $delay, $priority, $base64);
 
-            $result = $this->mns->getQueueRef($queueName)->sendMessage($request);
+            $result = $this->mns->getQueueRef($queueName, $base64)->sendMessage($request);
 
             if (!$result->isSucceed()) {
                 throw new \Exception('Send Message Failed. Status Code ' . $result->getStatusCode());
@@ -53,13 +53,14 @@ class Queue extends Mns
      *
      * @param string $queueName
      * @param int $waitSec
+     * @param bool $base64
      * @return array
      * @throws \Exception
      */
-    public function receiveMessage($queueName, $waitSec = 30)
+    public function receiveMessage($queueName, $waitSec = 30, $base64 = false)
     {
         try {
-            $result = $this->mns->getQueueRef($queueName)->receiveMessage($waitSec);
+            $result = $this->mns->getQueueRef($queueName, $base64)->receiveMessage($waitSec);
 
             if (!$result->isSucceed()) {
                 throw new \Exception('Receive Message Failed. Status Code ' . $result->getStatusCode());
@@ -89,16 +90,17 @@ class Queue extends Mns
      * @param string $queueName
      * @param int $number
      * @param int $waitSec
+     * @param bool $base64
      * @return array
      * @throws \Exception
      */
-    public function receiveBatchMessage($queueName, $number = 16, $waitSec = 30)
+    public function receiveBatchMessage($queueName, $number = 16, $waitSec = 30, $base64 = false)
     {
         try {
 
             $request = new BatchReceiveMessageRequest($number, $waitSec);
 
-            $result = $this->mns->getQueueRef($queueName)->batchReceiveMessage($request);
+            $result = $this->mns->getQueueRef($queueName, $base64)->batchReceiveMessage($request);
 
             if (!$result->isSucceed()) {
                 throw new \Exception('Receive Message Failed. Status Code ' . $result->getStatusCode());
@@ -133,13 +135,14 @@ class Queue extends Mns
      *
      * @param string $queueName
      * @param string $receiptHandle
+     * @param bool $base64
      * @return bool
      * @throws \Exception
      */
-    public function deleteMessage($queueName, $receiptHandle)
+    public function deleteMessage($queueName, $receiptHandle, $base64 = false)
     {
         try {
-            $result = $this->mns->getQueueRef($queueName)->deleteMessage($receiptHandle);
+            $result = $this->mns->getQueueRef($queueName, $base64)->deleteMessage($receiptHandle);
 
             if (!$result->isSucceed()) {
                 throw new \Exception('Delete Message Failed. Status Code ' . $result->getStatusCode());
@@ -157,13 +160,14 @@ class Queue extends Mns
      *
      * @param string $queueName
      * @param array $receiptHandle
+     * @param bool $base64
      * @return bool
      * @throws \Exception
      */
-    public function deleteBatchMessage($queueName, array $receiptHandle)
+    public function deleteBatchMessage($queueName, array $receiptHandle, $base64 = false)
     {
         try {
-            $result = $this->mns->getQueueRef($queueName)->batchDeleteMessage($receiptHandle);
+            $result = $this->mns->getQueueRef($queueName, $base64)->batchDeleteMessage($receiptHandle);
 
             if (!$result->isSucceed()) {
                 throw new \Exception('Delete Message Failed. Status Code ' . $result->getStatusCode());
